@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #ffcc80;
+            padding: 90px 50px;
+            border-radius: 10px;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 40px;
+            color: #b33c00;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            display: block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 25px;
+    background-color: #fff;
+    color: #b23e3e;
+        }
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #b33c00;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container input[type="submit"]:hover {
+            background-color: #993300;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Log In</h2>
+        <form action="/login" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Masuk">
+        </form>        
+    </div>
+</body>
+</html>

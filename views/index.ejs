@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croquant Cookies</title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+    <nav>
+        <div class="brand">Croquant Cookies</div>
+        <div>
+            <a href="#">Beranda</a>
+            <a href="/products">Produk</a>
+        </div> 
+        <form method="GET" action="/">
+            <input type="text" class="search-bar" name="search_query" placeholder="Search" value="<%= search_query %>">
+            <button type="submit">Search</button>
+        </form>
+        
+        </form>
+        <div class="auth-links">
+            <a href="/register">Register</a>
+            <a href="/login">Log in</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Selamat Datang di Website </h1>
+            <h1><strong>Croquant Cookies</strong></h1>
+            <p>Temukan kue kering renyah dan lezat dengan <br> berbagai pilihan rasa. Pesan dengan <br> mudah dan nikmati kenikmatan dalam setiap gigitan!</p>
+            <div class="auth-buttons">
+                <button>Daftar</button>
+                <button>Masuk</button>
+            </div>
+        </div>
+        <img src="/assets/Group 78.png" alt="Cookies Image">
+    </div>
+
+    <div class="about">
+        <h2>About</h2>
+        <p>Kami menghadirkan kue kering lezat dengan bahan terbaik dan resep tradisional. Kami menawarkan berbagai macam kue kering yang cocok untuk segala kesempatan. Setiap kue dibuat dengan penuh perhatian untuk menghadirkan kelezatan yang sempurna di setiap gigitan.</p>
+    </div>
+
+    <div class="product-list">
+        <% if (products.length > 0) { %>
+            <% products.forEach(product => { %>
+                <div class="product">
+                    <img src="/uploads/<%= product.gambar %>" alt="">
+                    <h2><%= product.name %></h2>
+                    <p class="price">Rp <%= product.price %></p>
+                    <p>Stock: <%= product.stock %> tersedia</p>
+                    <button>Tambahkan ke Keranjang</button>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>Produk tidak ditemukan.</p>
+        <% } %>
+    </div>
+
+    <div class="promo">
+        <img src="/assets/Group 80.png" alt="Promo Image">
+    </div>
+
+    <footer class="footer">
+        <p>Croquant Cookies</p>
+        <p>JL Tanjung. Kel Kasin. Kec Klojen. Kota Malang</p>
+        <p>+6288912032341</p>
+        <p>croquant.cookies00@gmail.com</p>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Police</a>
+            <a href="#">Terms</a>
+        </div>
+        <p>Copyright CroquantCookies2024</p>
+    </footer>
+</body>
+</html>

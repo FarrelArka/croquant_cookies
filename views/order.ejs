@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile User</title>
+    <link rel="stylesheet" href="/order.css">
+</head>
+<body>
+    <nav>
+        <div class="brand">Croquant Cookies</div>
+        <div>
+            <a href="#">Beranda</a>
+            <a href="#">Produk</a>
+            <a href="/history">History</a>
+            <a href="/cart">Cart</a>
+        </div>
+        <form method="GET" action="/orders">
+            <input type="text" class="search-bar" id="search-input" name="search_query" placeholder="Search" value="<%= search_query %>">
+            <button type="submit">Search</button>
+        </form>
+        <div class="user-icon">
+            <a href="/order"></a>
+            <a href="/profile"><img src="/uploads/<%= profile_picture %>" alt="User Profile" class="profile-img" style="border-radius: 50%;"></a>
+        </div>
+    </nav>
+
+    <h2 class="order-title">Order</h2> <!-- Pindahkan ke sini -->
+
+    <main>
+        <div class="order-container">
+            <!-- Order Item 1 -->
+            <div class="order-item">
+                <div class="product-images">
+                    <img src="/assets/putri salju.jpg" alt="Kue Putri Salju">
+                    <img src="/assets/kastengel.jpg" alt="Kastengel">                    
+                </div>
+                <div class="product-details">
+                    <p>Kue Putri Salju</p>
+                    <p>Kastengel</p>
+                    <p>Kuantitas: 2</p>
+                    <p>total harga: <strong>Rp 148.000</strong></p>
+                    <button class="btn-process">Proses</button>
+                </div>
+            </div>
+
+            <!-- Order Item 2 -->
+            <div class="order-item">
+                <div class="product-images">
+                    <img src="/assets/lidah mpus.jpg" alt="Kue Lidah Kucing">
+                </div>
+                <div class="product-details">
+                    <p>Kue Lidah Kucing</p>
+                    <p>Kuantitas: 2</p>
+                    <p>total harga: <strong>Rp 80.000</strong></p>
+                    <button class="btn-complete">Selesai</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+        <div class="footer">
+            <div class="bold">
+            <p>Copyright CroquantCookies2024</p></div>
+            <div class="footer-item">
+            <p>Croquant Cookies, JL Tanjung, Kel Kasin, Kec Klojen, Kota Malang</p>
+            <p>+6288912032341 | croquant.cookies00@gmail.com</p>
+        </div>
+            <div class="footer-link">
+            <p><a href="#">Privacy</a> | <a href="#">Police</a> | <a href="#">Terms</a></p>
+        </div>
+        </div>
+
+</body>
+
+</html>
