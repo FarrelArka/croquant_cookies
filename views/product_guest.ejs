@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croquant Cookies</title>
+    <link rel="stylesheet" href="/product_guest.css">
+</head>
+<body>
+<nav>
+    <div class="brand">Croquant Cookies</div>
+    <div>
+        <a href="/">Beranda</a>
+        <a href="/products">Produk</a>
+    </div> 
+    <form method="GET" action="/products">
+        <input type="text" class="search-bar" id="search-input" name="search_query" placeholder="Search" value="<%= search_query %>">
+        <button type="submit">Search</button>
+    </form>
+    <div class="auth-links">
+        <a href="/register">Register</a>
+        <a href="/login">Log in</a>
+    </div>
+</nav>
+    <div class="iya">
+    <h1>Produk</h1>
+    </div>
+    <div class="container">
+    <% if (search_results.length > 0) { %>
+        <% search_results.forEach(function(product) { %>
+            <div class="product">
+                <img src="/uploads/<%= product.gambar %>" alt="<%= product.name %>">
+                <h2><%= product.name %></h2>
+                <p class="price">Rp <%= product.price %></p>
+                <p>Stock: <%= product.stock %> tersedia</p>
+                <button>Tambahkan ke Keranjang</button>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Produk tidak ditemukan.</p>
+    <% } %>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <h2>Croquant Cookies</h2>
+            <p>JL Tanjung, Kel Kasin, Kec Klojen, Kota Malang</p>
+            <p>+6288912032341</p>
+            <p><a href="mailto:croquant.cookies00@gmail.com">croquant.cookies00@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Police</a>
+            <a href="#">Terms</a>
+        </div>
+    </footer>
+</body>
+</html>

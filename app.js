@@ -158,7 +158,24 @@
     });
     
 
+    app.get('/products', (req, res) => {
+        let sql_search = "SELECT product_id, name, price, stock, gambar FROM products";
+        const search_query = req.query.search_query;
+    
+        if (search_query) {
+            sql_search += " WHERE name LIKE ?";
+        }
+    
+        connection.query(sql_search, ['%' + search_query + '%'], (err, results) => {
+            if (err) throw err;
+            res.render('product_guest', {
+                search_results: results,
+                search_query: search_query || ''
+            });
+        });
+    });
 
+    
     // Show update profile page
     app.get('/update-profile', (req, res) => {
         if (!req.session.userId) {
