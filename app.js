@@ -348,7 +348,30 @@ app.post('/create-order', (req, res) => {
         });
     });
     
-
+    app.get('/product_user', (req, res) => {
+        if (!req.session.userId) {
+            return res.redirect('/login');
+        }
+    
+        const profilePicture = req.session.profilePicture || 'default-profile.jpg';
+        const searchQuery = req.query.search_query || '';
+        const userId = req.session.userId; // Get userId from session
+    
+        // Query untuk mendapatkan produk berdasarkan pencarian
+        const sqlProducts = 'SELECT * FROM products WHERE name LIKE ?';
+        connection.query(sqlProducts, [`%${searchQuery}%`], (err, products) => {
+            if (err) return res.send("Error: " + err.message);
+    
+            // Render halaman dengan data yang diperlukan
+            res.render('product_user', {
+                profile_picture: profilePicture,
+                products: products, // Kirim variabel products ke template
+                search_query: searchQuery,
+                userId: userId // Pass userId to the template
+            });
+        });
+    });
+    
     app.listen(3000, () => {
         console.log('Server is running on port 3000');
     });
