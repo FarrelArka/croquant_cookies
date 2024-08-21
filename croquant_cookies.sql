@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Agu 2024 pada 09.55
+-- Waktu pembuatan: 20 Agu 2024 pada 08.39
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -42,7 +42,23 @@ INSERT INTO `cart` (`id_cart`, `user_id`, `product_id`, `quantity`) VALUES
 (4, 9, 1, 1),
 (5, 9, 2, 1),
 (6, 9, 1, 1),
-(7, 9, 1, 1);
+(7, 9, 1, 1),
+(8, 9, 1, 1),
+(9, 9, 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `history_orders`
+--
+
+CREATE TABLE `history_orders` (
+  `histori_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `tanggal_order` date NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -66,24 +82,21 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `order_date`, `quantity`, `price`, `status`, `total_amount`) VALUES
-(1, 0, 0, '0000-00-00', '1', 0, 0, 0),
-(2, 0, 0, '0000-00-00', '1', 0, 0, 0),
-(3, 0, 0, '0000-00-00', '1', 0, 0, 0),
-(4, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(5, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(6, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(7, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(8, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(9, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(10, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(11, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(12, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(13, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(14, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(15, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(16, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(17, 9, 0, '0000-00-00', '1', 0, 0, 0),
-(18, 9, 0, '0000-00-00', '1', 0, 0, 0);
+(21, 9, 0, '0000-00-00', '1', 0, 0, 0),
+(22, 9, 0, '0000-00-00', '1', 0, 0, 0),
+(23, 9, 0, '0000-00-00', '1', 0, 0, 0),
+(24, 9, 0, '0000-00-00', '1', 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `point`
+--
+
+CREATE TABLE `point` (
+  `point_id` int(11) NOT NULL,
+  `point` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,6 +119,21 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`product_id`, `name`, `price`, `stock`, `gambar`) VALUES
 (1, 'kue putri salju', 45000, '10', 'putri salju.jpg'),
 (2, 'kue kastengel keju', 58000, '9', 'kastengel.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `transaction_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
+  `transaction_date` date NOT NULL,
+  `amount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -144,6 +172,14 @@ ALTER TABLE `cart`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indeks untuk tabel `history_orders`
+--
+ALTER TABLE `history_orders`
+  ADD PRIMARY KEY (`histori_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indeks untuk tabel `orders`
 --
 ALTER TABLE `orders`
@@ -152,10 +188,24 @@ ALTER TABLE `orders`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indeks untuk tabel `point`
+--
+ALTER TABLE `point`
+  ADD PRIMARY KEY (`point_id`);
+
+--
 -- Indeks untuk tabel `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indeks untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indeks untuk tabel `users`
@@ -172,19 +222,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `history_orders`
+--
+ALTER TABLE `history_orders`
+  MODIFY `histori_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT untuk tabel `point`
+--
+ALTER TABLE `point`
+  MODIFY `point_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `products`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
@@ -202,6 +270,26 @@ ALTER TABLE `users`
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Ketidakleluasaan untuk tabel `history_orders`
+--
+ALTER TABLE `history_orders`
+  ADD CONSTRAINT `history_orders_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `history_orders_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
